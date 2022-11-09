@@ -1,0 +1,137 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bé Tập Tính</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+    <div class="d-flex p-2"><h1>BÉ TẬP TÍNH</h1></div>
+        <div class="row align-items-start">
+        <div class="col">
+            <label for="operand1">Số thứ nhất: </label>
+            <input oninput="checkNumber()" type="text" id="n1" size = "100">
+            <br>
+            <br>
+            <label for="operand2">Số thứ hai: </label>
+            <input oninput="checkNumber()" type="text" id="n2" size = 100>
+            <br>
+            <br>
+
+        </div>
+        <div class="col">
+        <input class="form-check-input" input type="radio" id="op1" name="operator" value="+"/>
+            <label for="operation">Cộng</label>
+            <input class="form-check-input" input type="radio" id="op2" name="operator" value="-"/> 
+            <label for="operation">Trừ</label>
+            <br>
+            <input class="form-check-input" input type="radio" id="op3" name="operator" value="*">
+            <label for="operation">Nhân</label>
+            <input class="form-check-input" input type="radio" id="op4" name="operator" value="/">
+            <label for="operation">Chia</label>
+        </div>
+    </div>
+</div>
+
+        
+            
+Kết quả <input type="text" id="result">    
+<button onclick="Calculate()">Tính</button>
+
+
+    <br>
+    Thông báo <output type="text" id="Error"> 
+  <script type="text/javascript">
+        function Calculate(){
+            
+            var n1 = parseFloat(document.getElementById('n1').value);
+            var n2 = parseFloat(document.getElementById('n2').value);
+            var operator = document.getElementById(("Operator").value);
+            var result ;
+            checkFomular();
+            
+            if(document.getElementById("op1").checked){
+                checkblank();
+                result = n1+n2
+            }
+            if(document.getElementById("op2").checked){
+                checkblank();
+                result = n1-n2
+            }
+            if(document.getElementById("op3").checked){
+                checkblank();
+                result = n1*n2
+            }
+            if(document.getElementById("op4").checked){
+                checkblank();
+                if(n2 == 0){
+                    alert("Can not div 0")
+                }else{ 
+                    result = n1/n2
+                }
+            }
+
+            document.getElementById("result").value = result;
+        }
+        
+        function checkFomular(){
+            var a = 0 ;
+            const radio = document.querySelectorAll('input[name = "operator"]')
+            for(var i = 0; i < radio.length; i++){
+                if(radio[i].checked){
+                    document.getElementById("Error").value = " ";
+                    a = 1;
+                    break;
+                }
+                if (a == 0){
+                    
+                    document.getElementById("Error").style.color = "red"
+                    document.getElementById("Error").value = "vui lòng chọn phép tính"
+                    
+               
+                }
+            }
+        }
+                
+        function checkNumber(){
+            
+            var x = document.getElementById("n1").value
+            var y = document.getElementById("n2").value
+            var Error1 = "Giá trị nhập ở số thứ 1 không phải là số"
+            var Error2 = "Giá trị nhập ở số thứ 2 không phải là số"
+            var NotError = " "
+            if(isNaN(x)){
+                document.getElementById("Error").style.color = "red"
+                document.getElementById("Error").value = Error1
+            
+            }else if(isNaN(y)){
+                document.getElementById("Error").style.color = "red"
+                document.getElementById("Error").value = Error2
+            }else{
+                document.getElementById("Error").value = NotError
+            }
+            
+
+
+        }
+        function checkblank(){
+            var x = document.getElementById("n1").value
+            var y = document.getElementById("n2").value
+            var NotError = " "
+            var Error3 = "vui lòng nhập số còn thiếu"
+            if(x == 0 || y == 0){
+                document.getElementById("Error").style.color = "red"
+                document.getElementById("Error").value = Error3
+            } else{
+                document.getElementById("Error").value = NotError
+            }
+        }
+
+        
+
+  </script>
+
+    
+</body>
+</html>
